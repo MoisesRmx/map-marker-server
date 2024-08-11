@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import cors from 'cors'
 import path from 'path'
+import { METHODS } from 'http';
 
 let corsOptions = {
-  origin: ["*", 'https://moisesroberto.vercel.app/'],
-  optionsSuccessStatus: 200
+  "origin": "*",
+  "methods": "GET",
+  "optionsSuccessStatus": 200
 }
 
 const router = Router();
