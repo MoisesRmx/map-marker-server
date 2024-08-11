@@ -24,7 +24,8 @@ router.use(cors({
 router.get('/markerkey', (req, res) => {
   try {
     res.status(200)
-      .json({ key: process.env.API_KEY })
+      // .header('Access-Control-Allow-Origin', 'http://localhost:3000')
+      .json({ key: 'AIzaSyAIUZnLq5j2RqmQOvN8S2AMl3100J-npSA' })
   } catch (err) {
     res.status(404).json({ message: "No tienes acceso a este sitio" })
     console.error({ message: "No tienes acceso a este sitio" })
