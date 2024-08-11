@@ -3,7 +3,7 @@ import cors from 'cors'
 import path from 'path'
 
 let corsOptions = {
-  origin: 'https://moisesroberto.vercel.app/',
+  origin: ["*", 'https://moisesroberto.vercel.app/'],
   optionsSuccessStatus: 200
 }
 
