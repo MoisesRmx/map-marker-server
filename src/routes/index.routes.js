@@ -1,5 +1,14 @@
 import { Router } from 'express';
 import cors from 'cors'
+import path from 'path'
+
+/*
+let corsOptions = {
+  "origin": "*",
+  "methods": "GET",
+  "optionsSuccessStatus": 200
+}
+*/
 
 const router = Router();
 
@@ -17,15 +26,14 @@ router.use(cors({
       return callback(null, true)
     }
 
-    return callback(new Error('Not allowed by CORS'))
+    return callback(new Error('No Allowed Cors'))
   }
 }))
 
 router.get('/markerkey', (req, res) => {
   try {
     res.status(200)
-      .header('Access-Control-Allow-Origin', 'http://localhost:3000')
-      .json({ key: 'AIzaSyAIUZnLq5j2RqmQOvN8S2AMl3100J-npSA' })
+      .json({ key: process.env.API_KEY })
   } catch (err) {
     res.status(404).json({ message: "No tienes acceso a este sitio" })
     console.error({ message: "No tienes acceso a este sitio" })
