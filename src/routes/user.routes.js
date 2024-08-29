@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import cors from 'cors'
-import path from 'path'
+
+import * as user from '../controllers/auth.controller.js'
 
 const router = Router();
 
@@ -22,12 +23,14 @@ router.use(cors({
   }
 }))
 
-router.get('/markerkey', (req, res) => {
-  try {
-    res.status(200).json({ key: process.env.API_KEY })
-  } catch (err) {
-    res.status(404).json({ message: "No tienes acceso a este sitio" })
-  }
-})
+router.post('/login', user.login)
+
+router.post('/register', user.register)
+
+router.get('/findUser', user.find)
+
+router.get('/infos', user.validateJwt, user.products)
+
+router.delete('/removeUser', user.remove)
 
 export default router;
