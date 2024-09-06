@@ -1,36 +1,14 @@
-import { Router } from 'express';
-import cors from 'cors'
+import { Router } from 'express'
 
-import * as user from '../controllers/auth.controller.js'
+import { validateJwt } from '../controllers/validateJwt.controller.js'
+import * as userController from '../controllers/user.controller.js'
 
-const router = Router();
+const userRouter = Router()
 
-router.use(cors({
-  origin: (origin, callback) => {
-    const ACCEPTED_ORIGINS = [
-      'http://localhost:3000',
-      'http://localhost:5173'
-    ]
+userRouter.post('/add', validateJwt, userController.add)
 
-    if (ACCEPTED_ORIGINS.includes(origin)) {
-      return callback(null, true)
-    }
-    if (!origin) {
-      return callback(null, true)
-    }
+userRouter.post('/update', validateJwt, userController.update)
 
-    return callback(new Error('No Allowed Cors'))
-  }
-}))
+userRouter.delete('/remove', validateJwt, userController.remove)
 
-router.post('/login', user.login)
-
-router.post('/register', user.register)
-
-router.get('/findUser', user.find)
-
-router.get('/infos', user.validateJwt, user.products)
-
-router.delete('/removeUser', user.remove)
-
-export default router;
+export default userRouter
